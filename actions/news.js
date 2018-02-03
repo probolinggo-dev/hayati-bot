@@ -6,8 +6,8 @@ let newsCache = [];
 const getHeadlines = async () => {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await newsapi.v2.topHeadlines({
-        sources: 'the-verge',
+      const response = await newsapi.v2.everything({
+        sources: 'the-verge,the-next-web,tech-crunch',
         language: 'en',
       });
       resolve(response.articles.map(item => item.url));
