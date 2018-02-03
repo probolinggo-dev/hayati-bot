@@ -33,11 +33,14 @@ bot.hears(/((hayati jahat)|(kamu jahat))/, ctx => {
   });
 });
 
-bot.hears('Udah Pada Ngopi?', ctx => {
-  ctx.replyWithAudio({
-    source: fs.createReadStream(path.join(__dirname, 'assets/audio/ngopi.mp3')),
-    title: 'Udah Pada Ngopi Belom Bro'
-  });
+bot.hears(/udah/, ctx => {
+  const message = ctx.match.input;
+  if (message.match(/(ngopi|(minum kopi))/)) {
+    ctx.replyWithAudio({
+      source: fs.createReadStream(path.join(__dirname, 'assets/audio/ngopi.mp3')),
+      title: 'Udah Pada Ngopi Belom Bro'
+    });
+  }
 });
 
 bot.on('text', (ctx) => {
