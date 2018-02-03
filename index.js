@@ -1,18 +1,40 @@
+const fs = require('fs');
+const path = require('path');
 const Telegraf = require('telegraf');
-const fetch = require('node-fetch');
+const routes = require('./routes');
+const utils = require('./utils');
 require('dotenv').config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
-bot.start((ctx) => {
-  console.log('started:', ctx.from.id);
-  return ctx.reply('Halo kakak-kakak yang ganteng dan cantik, saya robot hayati, untuk sekarang hanya bisa ngecek bpi, hehe. monggo kontribusi biar saya makin pintar di https://github.com/probolinggo-dev/hayati-bot');
+
+routes.forEach(item => {
+  bot.hears(item.firstMatch, (ctx) => {
+    const message = ctx.match.input;
+    if (!item.secondMatch) {
+      return item.action()
+        .then(res => ctx.reply(res))
+        .catch(() => ctx.reply('maaf, ada kesalahan di server hayati kak'));
+    }
+
+    if (message.match(item.secondMatch)) {
+      return item.action()
+        .then(res => ctx.reply(res))
+        .catch(() => ctx.reply('maaf, ada kesalahan di server hayati kak'));
+    } else {
+      return ctx.reply(getRandomMessage());
+    }
+  });
 });
-bot.hears(/(bpi|bitcoin)/i, async (ctx) => {
-	const message = ctx.match.input;
-	if (message.match(/((hari ini)|(dino iki))/i)) {
-    const response = await fetch('https://api.coindesk.com/v1/bpi/currentprice/idr.json');
-    const data = await response.json();
-		ctx.reply(`Harga bitcoin hari ini ${data.bpi.IDR.rate} IDR kakak ...`);
-	}
+
+bot.hears(/((hayati jahat)|(kamu jahat))/, ctx => {
+  ctx.replyWithAudio({
+    source: fs.createReadStream(path.join(__dirname, 'assets/audio/zainudin-kejam.mp3')),
+    title: 'Zainudin 😭'
+  });
 });
+
+bot.on('text', (ctx) => {
+  ctx.reply(utils.getRandomMessage());
+})
+
 bot.startPolling();
