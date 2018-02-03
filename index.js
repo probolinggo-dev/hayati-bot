@@ -21,7 +21,7 @@ routes.forEach(item => {
         .then(res => ctx.reply(res))
         .catch(() => ctx.reply('maaf, ada kesalahan di server hayati kak'));
     } else {
-      return ctx.reply(getRandomMessage());
+      return ctx.reply(utils.getRandomMessage());
     }
   });
 });
