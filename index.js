@@ -36,7 +36,7 @@ bot.hears(/((hayati jahat)|(kamu jahat))/, ctx => {
 bot.hears(/((pada ngopi)|(kopi hitam))/, ctx => {
     ctx.replyWithAudio({
         source: fs.createReadStream(path.join(__dirname, 'assets/audio/ngopi.mp3')),
-        title: 'Udah Pada Ngopi Belom'
+        title: 'Udah Pada Ngopi Belom Bro'
     });
 });
 
