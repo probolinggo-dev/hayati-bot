@@ -2,10 +2,17 @@ const randomMessage = [
   'Rahasia 🤪',
   'huu ditanyain tok aku',
   'hayati capek kakak, gamau jawab',
-  'hmmm, apa ya? sek tak googling',
-  'hayati gak tau harus jawab apa',
+  'sek ta, aku lagi maen dota ini loh',
   'terserah mas',
-  'sek sek tak pikir',
+  'wait, sek disuruh ibuk',
+  'mboh',
+  'galau aku rek :(',
+  'aku masih di toilet',
+  'jangan manggil aku tok raa',
+  'aku sibuk, lagi nonton konser',
+  'lagi coding kak, gabisa jawab',
+  'lagi meeting aku kak, wait.',
+  'bentar kak, sama ibuk disuruh tidur, aku pura-pura tidur dulu',
 ]
 
 const getRandomMessage = () => {

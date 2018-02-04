@@ -43,8 +43,15 @@ bot.hears(/udah/, ctx => {
   }
 });
 
+let randomReply = true;
 bot.on('text', (ctx) => {
-  ctx.reply(utils.getRandomMessage());
+  if (randomReply) {
+    ctx.reply(utils.getRandomMessage());
+    randomReply = false;
+    setTimeout(() => {
+      randomReply = true;
+    }, 60000 * 10);
+  }
 })
 
 bot.startPolling();
