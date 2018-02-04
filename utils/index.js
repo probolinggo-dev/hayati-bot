@@ -1,7 +1,4 @@
 const randomMessage = [
-  'Rahasia 🤪',
-  'huu ditanyain tok aku',
-  'hayati capek kakak, gamau jawab',
   'sek ta, aku lagi maen dota ini loh',
   'terserah mas',
   'wait, sek disuruh ibuk',
