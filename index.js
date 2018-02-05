@@ -51,7 +51,7 @@ bot.command('wikihayati', async ctx => {
   if (message === '/wikihayati') return false;
   message = message.replace('/wikihayati ', '');
   const response = await wikipedia.search(message);
-  ctx.replyWithMarkdown(
+  return ctx.replyWithMarkdown(
     turndownService.turndown(response)
   );
 })
