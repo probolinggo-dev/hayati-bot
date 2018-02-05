@@ -46,6 +46,20 @@ bot.hears(/udah/, ctx => {
   }
 });
 
+bot.command('wikihayati', async ctx => {
+  try {
+    let message = ctx.update.message.text;
+    if (message === '/wikihayati') return false;
+    message = message.replace('/wikihayati ', '');
+    const response = await wikipedia.search(message);
+    ctx.replyWithMarkdown(
+      turndownService.turndown(response)
+    );
+  } catch (e) {
+    ctx.reply('aku ndak tau kalo itu kak');
+  }
+})
+
 bot.command('wiki', async ctx => {
   try {
     let message = ctx.update.message.text;
@@ -56,7 +70,7 @@ bot.command('wiki', async ctx => {
       turndownService.turndown(response)
     );
   } catch (e) {
-    ctx.reply('sorry lagi error kak');
+    ctx.reply('aku ndak tau kalo itu kak');
   }
 })
 
