@@ -1,9 +1,15 @@
 {
+  "name": "hayati-bot",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "dotenv": "^5.0.0",
     "newsapi": "^2.1.0",
     "node-fetch": "^1.7.3",
     "node-wikipedia": "0.0.2",
     "telegraf": "^3.17.6"
-  }
+  },
+  "license": "MIT"
 }
