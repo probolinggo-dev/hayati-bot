@@ -47,13 +47,17 @@ bot.hears(/udah/, ctx => {
 });
 
 bot.command('wiki', async ctx => {
-  let message = ctx.update.message.text;
-  if (message === '/wiki') return false;
-  message = message.replace('/wiki ', '');
-  const response = await wikipedia.search(message);
-  ctx.replyWithMarkdown(
-    turndownService.turndown(response)
-  );
+  try {
+    let message = ctx.update.message.text;
+    if (message === '/wiki') return false;
+    message = message.replace('/wiki ', '');
+    const response = await wikipedia.search(message);
+    ctx.replyWithMarkdown(
+      turndownService.turndown(response)
+    );
+  } catch (e) {
+    ctx.reply('sorry lagi error kak');
+  }
 })
 
 let randomReply = true;
