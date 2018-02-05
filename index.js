@@ -56,16 +56,6 @@ bot.command('wikihayati', async ctx => {
   );
 })
 
-bot.command('wiki', async ctx => {
-  let message = ctx.update.message.text;
-  if (message === '/wiki') return false;
-  message = message.replace('/wiki ', '');
-  const response = await wikipedia.search(message);
-  ctx.replyWithMarkdown(
-    turndownService.turndown(response)
-  );
-})
-
 let randomReply = true;
 bot.on('text', (ctx) => {
   if (randomReply) {
