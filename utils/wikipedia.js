@@ -18,6 +18,6 @@ const search = async keyword => {
   })
 }
 
-module.exports {
+module.exports = {
   search,
 };
