@@ -46,12 +46,12 @@ bot.hears(/udah/, ctx => {
   }
 });
 
-bot.command('wikihayati', async ctx => {
+bot.command('wiki', async ctx => {
   let message = ctx.update.message.text;
-  if (message === '/wikihayati') return false;
-  message = message.replace('/wikihayati ', '');
+  if (message === '/wiki') return false;
+  message = message.replace('/wiki ', '');
   const response = await wikipedia.search(message);
-  return ctx.replyWithMarkdown(
+  ctx.replyWithMarkdown(
     turndownService.turndown(response)
   );
 })
