@@ -1,3 +1,5 @@
+const wikipedia = require('./wikipedia');
+
 const randomMessage = [
   'sek ta, aku lagi maen dota ini loh',
   'terserah mas',
@@ -17,5 +19,6 @@ const getRandomMessage = () => {
 }
 
 module.exports = {
+  wikipedia,
   getRandomMessage,
 }
