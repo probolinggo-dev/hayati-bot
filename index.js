@@ -3,6 +3,9 @@ const path = require('path');
 const Telegraf = require('telegraf');
 const routes = require('./routes');
 const utils = require('./utils');
+const {wikipedia} = utils;
+const TurndownService = require('turndown')
+const turndownService = new TurndownService()
 require('dotenv').config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -43,6 +46,20 @@ bot.hears(/udah/, ctx => {
   }
 });
 
+bot.command('wiki', async ctx => {
+  try {
+    let message = ctx.update.message.text;
+    if (message === '/wiki') return false;
+    message = message.replace('/wiki ', '');
+    const response = await wikipedia.search(message);
+    ctx.replyWithMarkdown(
+      turndownService.turndown(response)
+    );
+  } catch (e) {
+    ctx.reply('aku ndak tau kalo itu kak');
+  }
+})
+
 let randomReply = true;
 bot.on('text', (ctx) => {
   if (randomReply) {
@@ -52,6 +69,6 @@ bot.on('text', (ctx) => {
       randomReply = true;
     }, 60000 * 10);
   }
-})
+});
 
 bot.startPolling();
