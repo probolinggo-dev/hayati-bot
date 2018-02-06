@@ -63,11 +63,34 @@ bot.command('wiki', async ctx => {
 let randomReply = true;
 bot.on('text', (ctx) => {
   if (randomReply) {
-    ctx.reply(utils.getRandomMessage());
+    const message = utils.getRandomMessage();
+    if (typeof message === 'string') {
+      return ctx.reply(message);
+    }
+
+    switch (message.type) {
+      case 'video':
+        return ctx.replyWithVideo({
+          source: message.source,
+        });
+      case 'photo':
+        return ctx.replyWithPhoto({
+          source: message.source,
+        });
+      case: 'audio':
+        return ctx.replyWithAudio({
+          source: message.source,
+        })
+      case: 'markdown':
+        return ctx.replyWithMarkdown(message.source);
+      default:
+        return;
+    }
+
     randomReply = false;
     setTimeout(() => {
       randomReply = true;
-    }, 60000 * 10);
+    }, 60000 * 1);
   }
 });
 

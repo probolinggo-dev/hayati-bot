@@ -1,17 +1,25 @@
 const wikipedia = require('./wikipedia');
+const fs = require('fs');
+const path = require('path');
 
 const randomMessage = [
-  'sek ta, aku lagi maen dota ini loh',
-  'terserah mas',
-  'wait, sek disuruh ibuk',
-  'mboh',
-  'galau aku rek :(',
-  'aku masih di toilet',
-  'jangan manggil aku tok raa',
-  'aku sibuk, lagi nonton konser',
-  'lagi coding kak, gabisa jawab',
-  'lagi meeting aku kak, wait.',
-  'bentar kak, sama ibuk disuruh tidur, aku pura-pura tidur dulu',
+  'apa',
+  'gak tau',
+  'rahasia :p',
+  'males ah',
+  'mandi dulu sana',
+  'cuci muka dulu sana',
+  'apanya',
+  'ooooooooooh',
+  'ha?',
+  {
+    type: 'video',
+    source: fs.createReadStream(path.join(__dirname, '../assets/video/bingung.mp4')),
+  },
+  {
+    type: 'video',
+    source: fs.createReadStream(path.join(__dirname, '../assets/gif/lol.gif')),
+  }
 ]
 
 const getRandomMessage = () => {
