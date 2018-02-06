@@ -65,24 +65,28 @@ bot.on('text', (ctx) => {
   if (randomReply) {
     const message = utils.getRandomMessage();
     if (typeof message === 'string') {
-      return ctx.reply(message);
+      ctx.reply(message);
+      break;
     }
 
     switch (message.type) {
       case 'video':
-        return ctx.replyWithVideo({
+        ctx.replyWithVideo({
           source: message.source,
         });
+        break;
       case 'photo':
-        return ctx.replyWithPhoto({
+        ctx.replyWithPhoto({
           source: message.source,
         });
+        break;
       case 'audio':
         return ctx.replyWithAudio({
           source: message.source,
         })
       case 'markdown':
-        return ctx.replyWithMarkdown(message.source);
+        ctx.replyWithMarkdown(message.source);
+        break;
       default:
         return;
     }
@@ -90,7 +94,7 @@ bot.on('text', (ctx) => {
     randomReply = false;
     setTimeout(() => {
       randomReply = true;
-    }, 60000 * 1);
+    }, 30000 * 1);
   }
 });
 

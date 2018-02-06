@@ -5,7 +5,7 @@ const path = require('path');
 const randomMessage = [
   'apa',
   'gak tau',
-  'rahasia :p',
+  'mbuh',
   'males ah',
   'mandi dulu sana',
   'cuci muka dulu sana',
