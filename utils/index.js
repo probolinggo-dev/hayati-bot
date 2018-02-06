@@ -19,7 +19,12 @@ const randomMessage = [
   {
     type: 'video',
     source: fs.createReadStream(path.join(__dirname, '../assets/gif/lol.gif')),
-  }
+  },
+  'apasih beb',
+  'cerewet',
+  'main sama ayam sana',
+  'mandiin kambing gih',
+  'udah minum obat?',
 ]
 
 const getRandomMessage = () => {
