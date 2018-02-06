@@ -77,11 +77,11 @@ bot.on('text', (ctx) => {
         return ctx.replyWithPhoto({
           source: message.source,
         });
-      case: 'audio':
+      case 'audio':
         return ctx.replyWithAudio({
           source: message.source,
         })
-      case: 'markdown':
+      case 'markdown':
         return ctx.replyWithMarkdown(message.source);
       default:
         return;
