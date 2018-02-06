@@ -66,7 +66,6 @@ bot.on('text', (ctx) => {
     const message = utils.getRandomMessage();
     if (typeof message === 'string') {
       ctx.reply(message);
-      break;
     }
 
     switch (message.type) {
