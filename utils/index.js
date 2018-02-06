@@ -5,12 +5,15 @@ const path = require('path');
 const randomMessage = [
   'apa',
   'gak tau',
+  'https://media.giphy.com/media/C9ICNxlhSUiPu/giphy.gif',
   'mbuh',
   'males ah',
   'mandi dulu sana',
+  'https://media.giphy.com/media/3otPotbzJxTYspCqxW/giphy.gif',
   'cuci muka dulu sana',
   'apanya',
   'ooooooooooh',
+  'https://media.giphy.com/media/3oFzmqVNa2wOiADQRi/giphy.gif',
   'ha?',
   {
     type: 'video',
@@ -23,6 +26,7 @@ const randomMessage = [
   'apasih beb',
   'cerewet',
   'main sama ayam sana',
+  'https://media.giphy.com/media/l1J9I0c0AvHvVMptC/giphy.gif',
   'mandiin kambing gih',
   'udah minum obat?',
 ]
