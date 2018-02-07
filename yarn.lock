@@ -521,9 +521,9 @@ symbol-tree@^3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
 
-telegraf@^3.17.6:
-  version "3.17.6"
-  resolved "https://registry.yarnpkg.com/telegraf/-/telegraf-3.17.6.tgz#3a7ba9ca69631a49e7d1407f35e90faf9e63cd4c"
+telegraf@^3.17.7:
+  version "3.17.7"
+  resolved "https://registry.yarnpkg.com/telegraf/-/telegraf-3.17.7.tgz#04dd5ea097c1479abc91625c848f2f0ed2dccaf1"
   dependencies:
     debug "^3.0.0"
     node-fetch "^1.6.3"
