@@ -25,7 +25,7 @@ const randomMessage = [
   },
   'apasih beb',
   'cerewet',
-  'main sama ayam sana',
+  'main sama ayam sana https://gph.is/1uRZi9z',
   'https://media.giphy.com/media/l1J9I0c0AvHvVMptC/giphy.gif',
   'mandiin kambing gih',
   'udah minum obat?',
