@@ -9,7 +9,7 @@
     "newsapi": "^2.1.0",
     "node-fetch": "^2.0.0",
     "ramda": "^0.25.0",
-    "telegraf": "^3.17.7",
+    "telegraf": "^3.17.8",
     "turndown": "^4.0.1"
   },
   "license": "MIT"
