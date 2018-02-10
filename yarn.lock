@@ -367,9 +367,9 @@ ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
-newsapi@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/newsapi/-/newsapi-2.1.0.tgz#11b89ef5edaaf628507c59829fa32819431c0bb2"
+newsapi@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/newsapi/-/newsapi-2.2.0.tgz#660ccfd5f2719f471e6a8af0783d223d99633249"
   dependencies:
     bluebird "^3.4.6"
     request "^2.83.0"

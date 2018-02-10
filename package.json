@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "dotenv": "^5.0.0",
-    "newsapi": "^2.1.0",
+    "newsapi": "^2.2.0",
     "node-fetch": "^2.0.0",
     "ramda": "^0.25.0",
     "telegraf": "^3.17.7",
