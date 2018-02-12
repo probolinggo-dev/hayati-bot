@@ -6,6 +6,8 @@ const utils = require('./utils');
 const {wikipedia} = utils;
 const TurndownService = require('turndown')
 const turndownService = new TurndownService()
+const slicer = require('./actions/slicer');
+const translate = require('google-translate-api');
 require('dotenv').config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -58,7 +60,31 @@ bot.command('wiki', async ctx => {
   } catch (e) {
     ctx.reply('aku ndak tau kalo itu kak');
   }
-})
+});
+
+bot.command('builtwith', async ctx => {
+  try {
+      let message = ctx.update.message.text;
+      if (message === '/builtwith') return false;
+      message = message.replace('/builtwith ', '');
+      const response = await slicer.scrape(message);
+      ctx.replyWithMarkdown(response)
+      .catch(() => ctx.reply('aku ndak tau kalo itu kak'));
+  } catch (e) {
+      ctx.reply('aku ndak tau kalo itu kak');
+  }
+});
+
+bot.command('translate', async ctx => {
+  let message = ctx.update.message.text;
+  if (message === '/translate') return false;
+  message = message.replace('/translate ', '');
+  translate(message, {from: 'auto', to: 'id'}).then(res => {
+    ctx.reply(res.text);
+  }).catch(err => {
+    ctx.reply('tak tahu aku kak');
+  });
+});
 
 let randomReply = true;
 bot.on('text', (ctx) => {

@@ -6,9 +6,11 @@
   },
   "dependencies": {
     "dotenv": "^5.0.0",
+    "google-translate-api": "^2.3.0",
     "newsapi": "^2.2.0",
     "node-fetch": "^2.0.0",
     "ramda": "^0.25.0",
+    "request": "^2.83.0",
     "telegraf": "^3.17.8",
     "turndown": "^4.0.1"
   },
