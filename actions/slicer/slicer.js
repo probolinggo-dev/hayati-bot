@@ -25,7 +25,7 @@ const builtWithSlicer = (contents) => {
             let subSliceItem = bodyItem.split("</a></h3>");
             let sliceItemTitle = subSliceItem[0];
             sliceItemTitle = sliceItemTitle.split("//trends.builtwith.com/");
-            sliceItemTitle = sliceItemTitle[2].split('">');
+            sliceItemTitle = sliceItemTitle[2].split("\">");
             let itemTitle = sliceItemTitle[1];
 
             item.push({
@@ -34,13 +34,13 @@ const builtWithSlicer = (contents) => {
         }
         
         data.push({
-            "title" : title, 
-            "item" : item
+            title, 
+            item
         });
     }
 
     return data;
-}
+};
 
 module.exports = {
     builtweb: builtWithSlicer

@@ -65,7 +65,7 @@ bot.command('wiki', async ctx => {
 bot.command("builtwith", async (ctx) => {
   try {
       let message = ctx.update.message.text;
-      if (message === "/builtwith") {return false};
+      if (message === "/builtwith") {return false;}
       message = message.replace("/builtwith ", "");
       const response = await slicer.scrape(message);
       ctx.replyWithMarkdown(response)
@@ -77,7 +77,7 @@ bot.command("builtwith", async (ctx) => {
 
 bot.command("translate", async (ctx) => {
   let message = ctx.update.message.text;
-  if (message === "translate") {return false};
+  if (message === "translate") {return false;}
   message = message.replace("/translate ", "");
   translate(message, {from: "auto", to: "id"}).then((res) => {
     ctx.reply(res.text);

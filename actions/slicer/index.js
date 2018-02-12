@@ -18,7 +18,7 @@ const printData = (data) => {
     });
 
     return print;
-}
+};
 
 const scrape = async (url) => {
     return new Promise(
@@ -50,7 +50,7 @@ const scrape = async (url) => {
     .catch((reason) => {
         return reason; 
     });
-}
+};
 
 module.exports = {
     scrape
