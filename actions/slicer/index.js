@@ -54,4 +54,4 @@ const scrape = async (url) => {
 
 module.exports = {
     scrape
-}
+};
