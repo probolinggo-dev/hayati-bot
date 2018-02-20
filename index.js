@@ -3,6 +3,8 @@ const path = require('path');
 const Telegraf = require('telegraf');
 const routes = require('./routes');
 const utils = require('./utils');
+const jadwalin = require('jadwalin');
+const fetch = require('node-fetch');
 const {
   wikipedia
 } = utils;
@@ -11,8 +13,21 @@ const turndownService = new TurndownService();
 const slicer = require('./actions/slicer');
 const translate = require('google-translate-api');
 require('dotenv').config();
+const subscribers = [];
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
+
+jadwalin(async () => {
+  try {
+    const response = await fetch('https://api.probolinggodev.org/quote/random');
+    const data = await response.json();
+    subscribers.forEach(item => {
+      bot.telegram.sendMessage(item, `Selamat pagi kakak. Quotes pagi ini "${data.content}" ~${data.author}`);
+    });
+  } catch (err) {
+    throw err;
+  }
+}).setiap('08:00');
 
 routes.forEach(item => {
   bot.hears(item.firstMatch, (ctx) => {
@@ -97,6 +112,10 @@ bot.command('translate', async (ctx) => {
 
 let randomReply = true;
 bot.on('text', (ctx) => {
+  const chatid = ctx.update.message.chat.id;
+  if (subscribers.indexOf(chatid) === -1) {
+    subscribers.push(chatid);
+  }
   if (randomReply) {
     randomReply = false;
     const message = utils.getRandomMessage();

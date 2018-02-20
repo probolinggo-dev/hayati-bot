@@ -8,7 +8,7 @@ module.exports = [
     action: () => {
       return new Promise(async (resolve, reject) => {
         try {
-          responseText = await news.getNews();
+          const responseText = await news.getNews();
           resolve(responseText);
         } catch(e) {
           reject(e);
@@ -19,7 +19,7 @@ module.exports = [
   {
     firstMatch: /((terima kasih)|makasih|kesuwon|(matur nuwun))/,
     action: () => {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         resolve('macama kakak 😬');
       });
     }
@@ -39,4 +39,4 @@ module.exports = [
       });
     }
   },
-]
+];
