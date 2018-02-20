@@ -4,7 +4,7 @@ const newsapi = new NewsAPI(process.env.NEWS_API_TOKEN);
 let newsCache = [];
 
 const getHeadlines = async () => {
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async (resolve) => {
     try {
       const response = await newsapi.v2.everything({
         sources: 'the-verge,the-next-web,tech-crunch',
@@ -14,11 +14,11 @@ const getHeadlines = async () => {
     } catch (e) {
       resolve(['lagi error nih kak']);
     }
-  })
-}
+  });
+};
 
 const getNews = async () => {
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async (resolve) => {
     if (newsCache.length === 0) {
       newsCache = await getHeadlines();
     }
@@ -26,10 +26,10 @@ const getNews = async () => {
     const result = newsCache[0];
     newsCache.shift();
     resolve(result);
-  })
-}
+  });
+};
 
 module.exports = {
   getHeadlines,
   getNews,
-}
+};
