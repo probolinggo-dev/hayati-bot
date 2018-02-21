@@ -27,7 +27,7 @@ jadwalin(async () => {
   } catch (err) {
     throw err;
   }
-}).setiap('11:59');
+}).setiap('12:10');
 
 routes.forEach(item => {
   bot.hears(item.firstMatch, (ctx) => {
