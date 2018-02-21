@@ -362,9 +362,9 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
-jadwalin@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/jadwalin/-/jadwalin-0.0.3.tgz#7cc41e989784df7d58d69c2de8aa17f5ce11850b"
+jadwalin@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/jadwalin/-/jadwalin-0.0.4.tgz#13ca7f57315552de11afce6f240c722e25578cf8"
 
 jsbn@~0.1.0:
   version "0.1.1"
