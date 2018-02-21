@@ -22,12 +22,36 @@ jadwalin(async () => {
     const response = await fetch('https://api.probolinggodev.org/quote/random');
     const data = await response.json();
     subscribers.forEach(item => {
-      bot.telegram.sendMessage(item, `Selamat siang kakak. Quotes pagi ini "${data.content}" ~${data.author}`);
+      bot.telegram.sendMessage(item, `Selamat pagi kakak. Quotes pagi ini "${data.content}" ~${data.author}`);
     });
   } catch (err) {
     throw err;
   }
-}).setiap('12:10');
+}).setiap('7:59');
+
+jadwalin(async () => {
+  try {
+    const response = await fetch('https://api.probolinggodev.org/quote/random');
+    const data = await response.json();
+    subscribers.forEach(item => {
+      bot.telegram.sendMessage(item, `Selamat siang kakak. Quotes siang ini "${data.content}" ~${data.author}`);
+    });
+  } catch (err) {
+    throw err;
+  }
+}).setiap('13:59');
+
+jadwalin(async () => {
+  try {
+    const response = await fetch('https://api.probolinggodev.org/quote/random');
+    const data = await response.json();
+    subscribers.forEach(item => {
+      bot.telegram.sendMessage(item, `Selamat malam kakak. Quotes malam ini "${data.content}" ~${data.author}`);
+    });
+  } catch (err) {
+    throw err;
+  }
+}).setiap('19:59');
 
 routes.forEach(item => {
   bot.hears(item.firstMatch, (ctx) => {
