@@ -1,5 +1,5 @@
 <p><img width="400" src="https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/27337338_2005560616139356_8635670197888099331_n.jpg?oh=445c791911f0bc4069cfcfddd2103af2&oe=5B1BEECB"/ alt="hayati bot"></p>
-nik hayatinya probolinggo_dev
+nik hayatinya ProbolinggoDev
 
 ## Requirements
 Before installing this project, you have to setup your environment with following requrements:
