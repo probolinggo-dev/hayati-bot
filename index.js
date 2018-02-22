@@ -1,3 +1,4 @@
+const io = require('socket.io-client');
 const fs = require('fs');
 const path = require('path');
 const Telegraf = require('telegraf');
@@ -14,8 +15,14 @@ const slicer = require('./actions/slicer');
 const translate = require('google-translate-api');
 require('dotenv').config();
 const subscribers = [];
-
+const socket = io.connect(process.env.SOCKET_URL);
 const bot = new Telegraf(process.env.BOT_TOKEN);
+
+socket.on('pull-request', async (payload) => {
+  subscribers.forEach(item => {
+    bot.telegram.sendMessage(item, payload.message);
+  });
+});
 
 jadwalin(async () => {
   try {
@@ -51,7 +58,7 @@ jadwalin(async () => {
   } catch (err) {
     throw err;
   }
-}).setiap('19:59');
+}).setiap('20:49');
 
 routes.forEach(item => {
   bot.hears(item.firstMatch, (ctx) => {
