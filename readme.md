@@ -15,7 +15,7 @@ $ cd hayati-bot
 $ yarn install
 ```
 
-Before running this project, first you have to create telegram bot for your own then add your bot token into `.env` file, yaa I know that `.env` file doesn't exist yet, so create it and you can see `.env.example` as an example.
+Before running this project, first you have to create telegram bot for your own then add your bot token into `config.js` file, yaa I know that `config.js` file doesn't exist yet, so create it and you can see `config.example.js` as an example.
 
 ### Generate token
 [create telegram bot](https://core.telegram.org/bots)

@@ -6,6 +6,7 @@ const routes = require('./routes');
 const utils = require('./utils');
 const jadwalin = require('jadwalin');
 const fetch = require('node-fetch');
+const config = require('./config');
 const {
   wikipedia
 } = utils;
@@ -13,24 +14,19 @@ const TurndownService = require('turndown');
 const turndownService = new TurndownService();
 const slicer = require('./actions/slicer');
 const translate = require('google-translate-api');
-require('dotenv').config();
-const subscribers = [];
-const socket = io.connect(process.env.SOCKET_URL);
-const bot = new Telegraf(process.env.BOT_TOKEN);
+const socket = io.connect(config.socketUrl);
+const bot = new Telegraf(config.botToken);
+const {chatId} = config;
 
-socket.on('pull-request', async (payload) => {
-  subscribers.forEach(item => {
-    bot.telegram.sendMessage(item, payload.message);
-  });
+socket.on('hooker', async (payload) => {
+  bot.telegram.sendMessage(chatId, payload.message);
 });
 
 jadwalin(async () => {
   try {
     const response = await fetch('https://api.probolinggodev.org/quote/random');
     const data = await response.json();
-    subscribers.forEach(item => {
-      bot.telegram.sendMessage(item, `Selamat pagi kakak. Quotes pagi ini "${data.content}" ~${data.author}`);
-    });
+    bot.telegram.sendMessage(chatId, `Selamat pagi kakak. Quotes pagi ini "${data.content}" ~${data.author}`);
   } catch (err) {
     throw err;
   }
@@ -40,9 +36,7 @@ jadwalin(async () => {
   try {
     const response = await fetch('https://api.probolinggodev.org/quote/random');
     const data = await response.json();
-    subscribers.forEach(item => {
-      bot.telegram.sendMessage(item, `Selamat siang kakak. Quotes siang ini "${data.content}" ~${data.author}`);
-    });
+    bot.telegram.sendMessage(chatId, `Selamat siang kakak. Quotes siang ini "${data.content}" ~${data.author}`);
   } catch (err) {
     throw err;
   }
@@ -52,9 +46,7 @@ jadwalin(async () => {
   try {
     const response = await fetch('https://api.probolinggodev.org/quote/random');
     const data = await response.json();
-    subscribers.forEach(item => {
-      bot.telegram.sendMessage(item, `Selamat malam kakak. Quotes malam ini "${data.content}" ~${data.author}`);
-    });
+    bot.telegram.sendMessage(chatId, `Selamat malam kakak. Quotes malam ini "${data.content}" ~${data.author}`);
   } catch (err) {
     throw err;
   }
@@ -143,10 +135,6 @@ bot.command('translate', async (ctx) => {
 
 let randomReply = true;
 bot.on('text', (ctx) => {
-  const chatid = ctx.update.message.chat.id;
-  if (subscribers.indexOf(chatid) === -1) {
-    subscribers.push(chatid);
-  }
   if (randomReply) {
     randomReply = false;
     const message = utils.getRandomMessage();
@@ -178,7 +166,7 @@ bot.on('text', (ctx) => {
 
     setTimeout(() => {
       randomReply = true;
-    }, 60000 * 10);
+    }, 60000);
   }
 });
 

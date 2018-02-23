@@ -1,6 +1,6 @@
-require('dotenv').config();
+const config = require('../config');
 const NewsAPI = require('newsapi');
-const newsapi = new NewsAPI(process.env.NEWS_API_TOKEN);
+const newsapi = new NewsAPI(config.newsApiToken);
 let newsCache = [];
 
 const getHeadlines = async () => {
