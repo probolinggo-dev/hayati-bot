@@ -5,7 +5,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "dotenv": "^5.0.0",
+    "dotenv": "^5.0.1",
     "google-translate-api": "^2.3.0",
     "jadwalin": "^0.0.4",
     "newsapi": "^2.2.0",
