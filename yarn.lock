@@ -288,13 +288,9 @@ extend@~3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.1.tgz#a755ea7bc1adfcc5a31ce7e762dbaadc5e636444"
 
-extsprintf@1.3.0:
+extsprintf@1.3.0, extsprintf@^1.2.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.3.0.tgz#96918440e3041a7a414f8c52e3c574eb3c3e1e05"
-
-extsprintf@^1.2.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
 
 fast-deep-equal@^1.0.0:
   version "1.0.0"
@@ -786,9 +782,9 @@ symbol-tree@^3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
 
-telegraf@^3.18.0:
-  version "3.18.0"
-  resolved "https://registry.yarnpkg.com/telegraf/-/telegraf-3.18.0.tgz#b11ecbabd638783d786b8b0a5be12b49464ef69d"
+telegraf@^3.19.0:
+  version "3.19.0"
+  resolved "https://registry.yarnpkg.com/telegraf/-/telegraf-3.19.0.tgz#10b2f382d781bee0f9697c01b14be41dd2b56784"
   dependencies:
     debug "^3.0.0"
     node-fetch "^2.0.0"
