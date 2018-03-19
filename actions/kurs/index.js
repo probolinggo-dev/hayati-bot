@@ -1,5 +1,5 @@
-const request = require('request')
-const cheerio = require('cheerio')
+const request = require('request');
+const cheerio = require('cheerio');
 
 const kursin = async(mata_uang) => {
   return new Promise(
@@ -14,17 +14,17 @@ const kursin = async(mata_uang) => {
       request(options, function (error, response, body) {
         if (!error && response.statusCode === 200) {
           try {
-		let $ = cheerio.load(body);
-		let data= "";
-		$('table#ctl00_PlaceHolderMain_biWebKursTransaksiBI_GridView1 tr').each((i, value) => {
-			var t =$(value).find("td,th")
-				.not($(value).find("td,th").last())
-				.map(function(i, el){
-				return $(el).text();
-			});
-			if(mata_uang.toUpperCase() + "  " == t.get(0).valueOf().toUpperCase())
-				data = "BI jualnya seharga " + t.get(2) + ", belinya " + t.get(3) + " setiap " + t.get(1) + t.get(0).replace(/\s/g,'') + "-nya kak."
-		});
+            let $ = cheerio.load(body);
+            let data= '';
+            $('table#ctl00_PlaceHolderMain_biWebKursTransaksiBI_GridView1 tr').each((i, value) => {
+              var t =$(value).find('td,th')
+                .not($(value).find('td,th').last())
+                .map(function(i, el){
+                  return $(el).text();
+                });
+              if(mata_uang.toUpperCase() + '  ' == t.get(0).valueOf().toUpperCase())
+                data = 'BI jualnya seharga ' + t.get(2) + ', belinya ' + t.get(3) + ' setiap ' + t.get(1) + t.get(0).replace(/\s/g,'') + '-nya kak.';
+            });
             resolve(data);
           } catch (err) {
             reject('Maaf terjadi gangguan');
@@ -37,11 +37,10 @@ const kursin = async(mata_uang) => {
   )
     .then((data) => {
       if (data=='')
-          return "aku nanyak BI, gak tahu juga kak. coba tanya tetangga sebelah kak."
+        return 'aku nanyak BI, gak tahu juga kak. coba tanya tetangga sebelah kak.';
       return data;
     })
     .catch((reason) => {
-	console.log("error di sini")
       return reason;
     });
 };
