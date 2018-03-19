@@ -41,12 +41,9 @@ const kursin = async(mata_uang) => {
       return data;
     })
     .catch((reason) => {
-      return reason;
+      throw reason;
     });
 };
-
-//var p = kursin("USD")
-//console.log("cek" + p)
 
 module.exports = {
   kursin
