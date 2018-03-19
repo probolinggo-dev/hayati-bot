@@ -23,7 +23,14 @@ const kursin = async(mata_uang) => {
                   return $(el).text();
                 });
               if(mata_uang.toUpperCase() + '  ' == t.get(0).valueOf().toUpperCase())
-                data = 'BI jualnya seharga ' + t.get(2) + ', belinya ' + t.get(3) + ' setiap ' + t.get(1) + t.get(0).replace(/\s/g,'') + '-nya kak.';
+                data = `
+*Harga Jual*
+Rp. ${t.get(2)}
+*Harga Beli*
+Rp. ${t.get(3)}
+
+*Per ${t.get(1)} ${t.get(0).replace(/\s/g,'')}*
+                `;
             });
             resolve(data);
           } catch (err) {
