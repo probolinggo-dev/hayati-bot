@@ -127,9 +127,7 @@ bot.command('kurs', async (ctx) => {
     message = message.replace('/kurs ', '');
     const response = await kursin.kursin(message);
     ctx.replyWithMarkdown(response)
-      .catch(() => {
-        ctx.reply('aku ndak tau juga kak');
-      });
+      .catch(() => ctx.reply('aku ndak tau juga kak'));
   } catch (err) {
     ctx.reply(err);
   }
