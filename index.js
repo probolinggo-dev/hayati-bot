@@ -13,10 +13,13 @@ const {
 const TurndownService = require('turndown');
 const turndownService = new TurndownService();
 const slicer = require('./actions/slicer');
+const kursin = require('./actions/kurs');
 const translate = require('google-translate-api');
 const socket = io.connect(config.socketUrl);
 const bot = new Telegraf(config.botToken);
 const {chatId} = config;
+
+const cheerio = require('cheerio')
 
 socket.on('hooker', async (payload) => {
   bot.telegram.sendMessage(chatId, payload.message);
@@ -112,6 +115,25 @@ bot.command('builtwith', async (ctx) => {
     const response = await slicer.scrape(message);
     ctx.replyWithMarkdown(response)
       .catch(() => ctx.reply('aku ndak tau kalo itu kak'));
+  } catch (err) {
+    ctx.reply(err);
+  }
+});
+
+bot.command('kurs', async (ctx) => {
+  try {
+    let message = ctx.update.message.text;
+    if (message === '/kurs') {
+      return false;
+    }
+    message = message.replace('/kurs ', '');
+    console.log("heo");
+    const response = await kursin.kursin(message);
+    console.log("he2");
+    ctx.replyWithMarkdown(response)
+      .catch((err) => {
+			console.log(err)
+			ctx.reply('aku ndak tau juga kak')});
   } catch (err) {
     ctx.reply(err);
   }
