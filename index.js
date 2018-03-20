@@ -27,7 +27,7 @@ jadwalin(async () => {
   try {
     const response = await fetch('https://api.probolinggodev.org/quote/random');
     const data = await response.json();
-    bot.telegram.sendMessage(chatId, `Selamat pagi kakak. Quotes pagi ini "${data.content}" ~${data.author}`);
+    bot.telegram.sendMessage(chatId, `"${data.content}" ~${data.author}`);
   } catch (err) {
     throw err;
   }
@@ -37,7 +37,7 @@ jadwalin(async () => {
   try {
     const response = await fetch('https://api.probolinggodev.org/quote/random');
     const data = await response.json();
-    bot.telegram.sendMessage(chatId, `Selamat siang kakak. Quotes siang ini "${data.content}" ~${data.author}`);
+    bot.telegram.sendMessage(chatId, `"${data.content}" ~${data.author}`);
   } catch (err) {
     throw err;
   }
@@ -47,7 +47,7 @@ jadwalin(async () => {
   try {
     const response = await fetch('https://api.probolinggodev.org/quote/random');
     const data = await response.json();
-    bot.telegram.sendMessage(chatId, `Selamat malam kakak. Quotes malam ini "${data.content}" ~${data.author}`);
+    bot.telegram.sendMessage(chatId, `"${data.content}" ~${data.author}`);
   } catch (err) {
     throw err;
   }
@@ -114,22 +114,38 @@ bot.command('builtwith', async (ctx) => {
     ctx.replyWithMarkdown(response)
       .catch(() => ctx.reply('aku ndak tau kalo itu kak'));
   } catch (err) {
-    ctx.reply(err);
+    ctx.reply('duh error nih kak');
   }
 });
 
 bot.command('kurs', async (ctx) => {
+  const errorMessage = `
+*bukan gitu caranya kak!*
+caranya adalah \`/kurs symbol_kurs\` contoh \`/kurs usd\`
+
+*Contoh Kurs yang bisa dipakai:*
+- USD
+- JPY
+- AUD
+- EUR
+- Dan lain lain
+  `;
+  const username = ctx.update.message.from.username;
+  let message = ctx.update.message.text;
   try {
-    let message = ctx.update.message.text;
     if (message === '/kurs') {
-      return false;
+      return ctx.replyWithMarkdown(errorMessage);
     }
+
+    ctx.reply(`@${username} wait kak, aku tanyain ke BI bentar ..`);
+
     message = message.replace('/kurs ', '');
     const response = await kursin.kursin(message);
+    ctx.reply(`@${username} ini kak`);
     ctx.replyWithMarkdown(response)
-      .catch(() => ctx.reply('aku ndak tau juga kak'));
+      .catch(() => ctx.reply(`@${username} aku ndak tau juga kak`));
   } catch (err) {
-    ctx.reply(err);
+    ctx.reply(`@${username} duh error kak!`);
   }
 });
 
