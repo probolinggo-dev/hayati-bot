@@ -20,39 +20,26 @@ const socket = io.connect(config.socketUrl);
 const bot = new Telegraf(config.botToken);
 const {chatId} = config;
 
+let broadcastedUrls = [];
+const dailyUrlSchedule = ['7:59', '12:59', '18:59'];
 socket.on('hooker', async (payload) => {
   bot.telegram.sendMessage(chatId, payload.message);
 });
-
-jadwalin(async () => {
+const dailyUrl = async () => {
   try {
-    const response = await fetch('https://api.probolinggodev.org/quote/random');
+    const response = await fetch('https://api.probolinggodev.org/telegram/latest-urls');
     const data = await response.json();
-    bot.telegram.sendMessage(chatId, `"${data.content}" ~${data.author}`);
+    data.some(item => {
+      if (broadcastedUrls.indexOf(item.url) === -1) {
+        broadcastedUrls.push(item.url);
+        return bot.telegram.sendMessage(chatId, `"${item.description}" ${item.url}`);
+      }
+    });
   } catch (err) {
     throw err;
   }
-}).setiap('7:59');
-
-jadwalin(async () => {
-  try {
-    const response = await fetch('https://api.probolinggodev.org/quote/random');
-    const data = await response.json();
-    bot.telegram.sendMessage(chatId, `"${data.content}" ~${data.author}`);
-  } catch (err) {
-    throw err;
-  }
-}).setiap('13:59');
-
-jadwalin(async () => {
-  try {
-    const response = await fetch('https://api.probolinggodev.org/quote/random');
-    const data = await response.json();
-    bot.telegram.sendMessage(chatId, `"${data.content}" ~${data.author}`);
-  } catch (err) {
-    throw err;
-  }
-}).setiap('20:49');
+};
+dailyUrlSchedule.forEach(item => jadwalin(dailyUrl).setiapJam(item));
 
 routes.forEach(item => {
   bot.hears(item.firstMatch, (ctx) => {
@@ -180,6 +167,9 @@ let randomReply = true;
 bot.on('text', (ctx) => {
   if (randomReply) {
     randomReply = false;
+    setTimeout(() => {
+      randomReply = true;
+    }, 60000);
     const message = utils.getRandomMessage();
     if (typeof message === 'string') {
       ctx.reply(message);
@@ -206,10 +196,6 @@ bot.on('text', (ctx) => {
     default:
       return;
     }
-
-    setTimeout(() => {
-      randomReply = true;
-    }, 60000);
   }
 });
 
