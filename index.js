@@ -39,7 +39,9 @@ const dailyUrl = async () => {
     throw err;
   }
 };
-dailyUrlSchedule.forEach(item => jadwalin(dailyUrl).setiapJam(item));
+dailyUrlSchedule.forEach(async (item) => {
+  await jadwalin(dailyUrl).setiapJam(item);
+});
 
 routes.forEach(item => {
   bot.hears(item.firstMatch, (ctx) => {
