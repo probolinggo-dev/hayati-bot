@@ -21,7 +21,7 @@ const bot = new Telegraf(config.botToken);
 const {chatId} = config;
 
 let broadcastedUrls = [];
-const dailyUrlSchedule = ['7:59', '12:59', '18:59'];
+const dailyUrlSchedule = ['16:1', '12:59', '17:21'];
 socket.on('hooker', async (payload) => {
   bot.telegram.sendMessage(chatId, payload.message);
 });
@@ -40,7 +40,7 @@ const dailyUrl = async () => {
   }
 };
 dailyUrlSchedule.forEach(async (item) => {
-  await jadwalin(dailyUrl).setiapJam(item);
+  jadwalin(dailyUrl).setiapJam(item);
 });
 
 routes.forEach(item => {
