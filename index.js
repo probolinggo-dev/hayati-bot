@@ -21,7 +21,7 @@ const bot = new Telegraf(config.botToken);
 const {chatId} = config;
 
 let broadcastedUrls = [];
-const dailyUrlSchedule = ['16:1', '12:59', '17:21'];
+const dailyUrlSchedule = ['7:59', '12:59', '19:59'];
 socket.on('hooker', async (payload) => {
   bot.telegram.sendMessage(chatId, payload.message);
 });
@@ -29,17 +29,18 @@ const dailyUrl = async () => {
   try {
     const response = await fetch('https://api.probolinggodev.org/telegram/latest-urls');
     const data = await response.json();
-    data.some(item => {
-      if (broadcastedUrls.indexOf(item.url) === -1) {
-        broadcastedUrls.push(item.url);
-        return bot.telegram.sendMessage(chatId, `"${item.description}" ${item.url}`);
+    for (let i = 0; i < data.length; i++) {
+      if (broadcastedUrls.indexOf(data[i].url) === -1) {
+        broadcastedUrls.push(data[i].url);
+        bot.telegram.sendMessage(chatId, `"${data[i].description}" ${data[i].url}`);
+        break;
       }
-    });
+    }
   } catch (err) {
     throw err;
   }
 };
-dailyUrlSchedule.forEach(async (item) => {
+dailyUrlSchedule.forEach(item => {
   jadwalin(dailyUrl).setiapJam(item);
 });
 
