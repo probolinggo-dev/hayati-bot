@@ -6,11 +6,6 @@ const getKurs = require('./actions/getKurs');
 
 module.exports = [
   {
-    suffix: /(berita|news)/,
-    prefix: /((hari ini)|(dino iki)|selanjutnya)/i,
-    action: getNews,
-  },
-  {
     suffix: /gempa/,
     action: getGempa,
   },
@@ -26,5 +21,9 @@ module.exports = [
   {
     command: 'kurs',
     action: getKurs,
-  }
+  },
+  {
+    command: 'news',
+    action: getNews,
+  },
 ];

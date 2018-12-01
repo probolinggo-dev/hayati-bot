@@ -9,8 +9,8 @@ routes.forEach(item => {
     bot.command(item.command, async (ctx) => {
       const message = ctx.update.message.text;
       const params = message
-        .replace(`/${item.command }`, '')
-        .split(' ')
+        .replace(`/${item.command} `, '')
+        .split(/ +(?=[\w]+:)/g)
         .filter(item => !!item);
       item.action(ctx, params);
     });
