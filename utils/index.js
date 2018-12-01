@@ -29,13 +29,13 @@ const randomMessage = [
   'https://media.giphy.com/media/l1J9I0c0AvHvVMptC/giphy.gif',
   'mandiin kambing gih',
   'udah minum obat?',
-]
+];
 
 const getRandomMessage = () => {
   return randomMessage[Math.floor(Math.random()*randomMessage.length)];
-}
+};
 
 module.exports = {
   wikipedia,
   getRandomMessage,
-}
+};

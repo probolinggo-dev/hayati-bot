@@ -6,7 +6,7 @@ const search = async keyword => {
     try {
       const response = await fetch(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${keyword}&format=json`);
       const data = await response.json();
-      const snippet = R.pathOr(null, ['query','search','0','snippet'], data)
+      const snippet = R.pathOr(null, ['query','search','0','snippet'], data);
       if (!snippet)
         reject({message: 'not found!'});
 
@@ -15,8 +15,8 @@ const search = async keyword => {
     } catch (e) {
       reject(e);
     }
-  })
-}
+  });
+};
 
 module.exports = {
   search,
