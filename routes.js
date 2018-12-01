@@ -1,42 +1,30 @@
-const news = require('./actions/news');
-const fetch = require('node-fetch');
+const getNews = require('./actions/getNews');
+const getGempa = require('./actions/getGempa');
+const getBpi = require('./actions/getBpi');
+const getBookOffer = require('./actions/getBookOffer');
+const getKurs = require('./actions/getKurs');
 
 module.exports = [
   {
-    firstMatch: /(berita|news)/,
-    secondMatch: /((hari ini)|(dino iki)|selanjutnya)/i,
-    action: () => {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const responseText = await news.getNews();
-          resolve(responseText);
-        } catch(e) {
-          reject(e);
-        }
-      });
-    }
+    suffix: /(berita|news)/,
+    prefix: /((hari ini)|(dino iki)|selanjutnya)/i,
+    action: getNews,
   },
   {
-    firstMatch: /((terima kasih)|makasih|kesuwon|(matur nuwun))/,
-    action: () => {
-      return new Promise((resolve) => {
-        resolve('macama kakak 😬');
-      });
-    }
+    suffix: /gempa/,
+    action: getGempa,
   },
   {
-    firstMatch: /(bpi|bitcoin)/i,
-    secondMatch: /((hari ini)|(dino iki))/i,
-    action: () => {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const response = await fetch('https://api.coindesk.com/v1/bpi/currentprice/idr.json');
-          const data = await response.json();
-          resolve(`Harga bitcoin hari ini ${data.bpi.IDR.rate} IDR kakak ...`);
-        } catch(e) {
-          reject(e);
-        }
-      });
-    }
+    suffix: /(bpi|bitcoin)/i,
+    prefix: /((hari ini)|(dino iki))/i,
+    action: getBpi,
   },
+  {
+    command: 'bookoffer',
+    action: getBookOffer,
+  },
+  {
+    command: 'kurs',
+    action: getKurs,
+  }
 ];

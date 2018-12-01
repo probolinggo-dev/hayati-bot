@@ -10,7 +10,7 @@
 const request = require('request');
 const cheerio = require('cheerio');
 
-const booksoffer = async() => {
+const getBookOffer = async (context) => {
   return new Promise(
     (resolve, reject) => {
       const options = {
@@ -41,16 +41,16 @@ Semoga kakak beruntung ya
       });
     }
   )
-    .then((data) => {
-      if (data=='')
-        return 'gak ketemu kak, dari pada nyari buku gak ketemu, gimana kalau ketemuan sama aku aja kak?.';
-      return data;
+    .then(data => {
+      if (!data)
+        context.reply('gak ketemu kak, dari pada nyari buku gak ketemu, gimana kalau ketemuan sama aku aja kak?.');
+      
+      context.replyWithMarkdown(data)
+        .catch(() => context.reply('hemm..., bingung aku kak'));
     })
     .catch((reason) => {
       throw reason;
     });
 };
 
-module.exports = {
-  booksoffer
-};
+module.exports = getBookOffer;
