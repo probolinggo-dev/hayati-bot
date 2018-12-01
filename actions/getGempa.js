@@ -1,7 +1,7 @@
 const request = require('request');
 const parseString = require('xml2js').parseString;
 
-const gempa = async() => {
+const getGempa = async() => {
   return new Promise(
     (resolve, reject) => {
       const options = {
@@ -52,6 +52,4 @@ const gempa = async() => {
     });
 };
 
-module.exports = {
-  gempa
-};
+module.exports = getGempa;

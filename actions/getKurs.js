@@ -1,7 +1,25 @@
 const request = require('request');
 const cheerio = require('cheerio');
 
-const kursin = async(mata_uang) => {
+const errorMessage = `
+*bukan gitu caranya kak!*
+caranya adalah \`/kurs symbol_kurs\` contoh \`/kurs usd\`
+
+*Contoh Kurs yang bisa dipakai:*
+- USD
+- JPY
+- AUD
+- EUR
+- Dan lain lain
+  `;
+
+const kursin = async(context, params) => {
+  const mata_uang = params[0];
+  const username = context.update.message.from.username;
+  if (!mata_uang) {
+    return context.replyWithMarkdown(errorMessage);
+  }
+  context.reply(`@${username} wait kak, aku tanyain ke BI bentar ..`);
   return new Promise(
     (resolve, reject) => {
       const options = {
@@ -45,13 +63,13 @@ Rp. ${t.get(3)}
     .then((data) => {
       if (data=='')
         return 'aku nanyak BI, gak tahu juga kak. coba tanya tetangga sebelah kak.';
-      return data;
+      context.reply(`@${username} ini kak`);
+      context.replyWithMarkdown(data)
+        .catch(() => context.reply(`@${username} aku ndak tau juga kak`));
     })
-    .catch((reason) => {
-      throw reason;
+    .catch(() => {
+      context.reply(`@${username} duh error kak!`);
     });
 };
 
-module.exports = {
-  kursin
-};
+module.exports = kursin;

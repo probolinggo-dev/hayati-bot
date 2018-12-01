@@ -17,19 +17,18 @@ const getHeadlines = async () => {
   });
 };
 
-const getNews = async () => {
-  return new Promise(async (resolve) => {
-    if (newsCache.length === 0) {
-      newsCache = await getHeadlines();
+module.exports = function() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (newsCache.length === 0) {
+        newsCache = await getHeadlines();
+      }
+  
+      const result = newsCache[0];
+      newsCache.shift();
+      resolve(result);
+    } catch (e) {
+      reject(e);
     }
-
-    const result = newsCache[0];
-    newsCache.shift();
-    resolve(result);
   });
-};
-
-module.exports = {
-  getHeadlines,
-  getNews,
 };
