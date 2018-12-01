@@ -31,7 +31,7 @@ cepetan cek di sini kak: https://www.packtpub.com/packt/offers/free-learning
 Semoga kakak beruntung ya
 #probolinggoDev
             `
-            resolve(judul);
+            resolve(data);
           } catch (err) {
             reject('Sori kak, aku lagi ada gangguan');
           }
