@@ -15,6 +15,7 @@ const turndownService = new TurndownService();
 const slicer = require('./actions/slicer');
 const kursin = require('./actions/kurs');
 const gempa = require('./actions/gempa');
+const booksoffer = require('./actions/booksoffer');
 const translate = require('google-translate-api');
 const socket = io.connect(config.socketUrl);
 const bot = new Telegraf(config.botToken);
@@ -118,7 +119,15 @@ bot.command('gempa', async (ctx) => {
     ctx.reply('duh error nih kak');
   }
 });
-
+bot.command('booksoffer', async (ctx) => {
+  try {
+    const respon = await booksoffer.booksoffer();
+    ctx.replyWithMarkdown(respon)
+      .catch(() => ctx.reply('hemm..., bingung aku kak'));
+  } catch (err) {
+    ctx.reply('aku error kak');
+  }
+});
 bot.command('kurs', async (ctx) => {
   const errorMessage = `
 *bukan gitu caranya kak!*
