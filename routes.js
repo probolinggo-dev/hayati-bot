@@ -4,7 +4,7 @@ const getBpi = require('./actions/getBpi');
 const getBookOffer = require('./actions/getBookOffer');
 const getKurs = require('./actions/getKurs');
 
-module.exports = [
+const hears = [
   {
     suffix: /gempa/,
     action: getGempa,
@@ -14,6 +14,9 @@ module.exports = [
     prefix: /((hari ini)|(dino iki))/i,
     action: getBpi,
   },
+];
+
+const commands = [
   {
     command: 'bookoffer',
     action: getBookOffer,
@@ -27,3 +30,15 @@ module.exports = [
     action: getNews,
   },
 ];
+
+const events = [
+  {
+    event: 'new_chat_members',
+    action: context => {
+      const username = context.update.message.from.username;
+      context.reply(`selamat datang @${username} silahkan perkenalkan diri kak`);
+    },
+  },
+];
+
+module.exports = [...hears, ...commands, ...events];

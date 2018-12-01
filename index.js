@@ -5,6 +5,12 @@ const config = require('./config');
 const bot = new Telegraf(config.botToken);
 
 routes.forEach(item => {
+  if (item.event) {
+    bot.on(item.event, async ctx => {
+      item.action(ctx);
+    });
+  }
+
   if (item.command) {
     bot.command(item.command, async (ctx) => {
       const message = ctx.update.message.text;
@@ -14,21 +20,21 @@ routes.forEach(item => {
         .filter(item => !!item);
       item.action(ctx, params);
     });
-  } else {
+  } else if (item.suffix) {
     bot.hears(item.suffix, (ctx) => {
       const message = ctx.match.input;
       if (!item.prefix) {
-        return item.action()
+        item.action()
           .then(res => ctx.reply(res))
           .catch(() => ctx.reply('maaf, ada kesalahan di server hayati kak'));
       }
   
       if (message.match(item.prefix)) {
-        return item.action()
+        item.action()
           .then(res => ctx.reply(res))
           .catch(() => ctx.reply('maaf, ada kesalahan di server hayati kak'));
       } else {
-        return ctx.reply(utils.getRandomMessage());
+        ctx.reply(utils.getRandomMessage());
       }
     });
   }
