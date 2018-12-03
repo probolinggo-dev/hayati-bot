@@ -16,7 +16,7 @@ routes.forEach(item => {
       const message = ctx.update.message.text;
       const params = message
         .replace(`/${item.command} `, '')
-        .split(/ +(?=[\w]+:)/g)
+        .split(/\s(?=(?:[^'"`“]*(['"`”]).*?\1)*[^'"`”]*$)/g)
         .filter(item => !!item);
       item.action(ctx, params);
     });
