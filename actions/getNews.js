@@ -1,5 +1,6 @@
 const config = require('../config');
 const NewsAPI = require('newsapi');
+const getKeyParam = require('../utils/getKeyParams');
 const newsapi = new NewsAPI(config.newsApiToken);
 let newsCache = {};
 
@@ -14,16 +15,7 @@ const getHeadlines = async (options) => {
   });
 };
 
-function getKeyParam(params, keyword) {
-  const key = (
-    params.filter(item => item.indexOf(`${keyword}=`) !== -1)[0] || ''
-  ).replace(`${keyword}=`, '')
-    .replace(/[^\w\s]/g, '');
-
-  return key || null;
-}
-
-module.exports = function(context, params) {
+module.exports = async function(context, params) {
   const q = getKeyParam(params, 'q');
   const category = getKeyParam(params, 'category');
   const language = getKeyParam(params, 'language') || 'id';
@@ -31,26 +23,23 @@ module.exports = function(context, params) {
   const username = context.update.message.from.username;
   const key = `${q}-${category}-${language}-${country}`;
 
-  return new Promise(async (resolve, reject) => {
-    try {
-      if ((newsCache[key] || []).length === 0) {
-        const headlines = await getHeadlines({
-          q,
-          category,
-          language,
-          country,
-        });
-        if (headlines.length === 0) {
-          return context.replyWithMarkdown(`@${username} aku gak nemu headline tentang *${q}* kak, maaf :(`);
-        }
-        newsCache[key] = headlines;
+  try {
+    if ((newsCache[key] || []).length === 0) {
+      const headlines = await getHeadlines({
+        q,
+        category,
+        language,
+        country,
+      });
+      if (headlines.length === 0) {
+        return context.replyWithMarkdown(`@${username} aku gak nemu headline tentang *${q}* kak, maaf :(`);
       }
-  
-      const result = newsCache[key][0];
-      newsCache[key].shift();
-      context.reply(result);
-    } catch (e) {
-      reject(e);
+      newsCache[key] = headlines;
     }
-  });
+
+    const result = newsCache[key].shift();
+    context.reply(result);
+  } catch (e) {
+    context.reply('error kak :(');
+  }
 };

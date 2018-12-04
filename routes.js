@@ -3,6 +3,7 @@ const getGempa = require('./actions/getGempa');
 const getBpi = require('./actions/getBpi');
 const getBookOffer = require('./actions/getBookOffer');
 const getKurs = require('./actions/getKurs');
+const getRules = require('./actions/getRules');
 
 const hears = [
   {
@@ -29,6 +30,10 @@ const commands = [
     command: 'news',
     action: getNews,
   },
+  {
+    command: 'rules',
+    action: getRules,
+  }
 ];
 
 const events = [
