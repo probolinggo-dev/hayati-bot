@@ -1,6 +1,5 @@
 const Telegraf = require('telegraf');
 const routes = require('./routes');
-const utils = require('./utils');
 const config = require('./config');
 const bot = new Telegraf(config.botToken);
 
@@ -20,21 +19,15 @@ routes.forEach(item => {
         .filter(item => !!item);
       item.action(ctx, params);
     });
-  } else if (item.suffix) {
-    bot.hears(item.suffix, (ctx) => {
+  }
+
+  if (item.prefix) {
+    bot.hears(item.prefix, ctx => {
       const message = ctx.match.input;
-      if (!item.prefix) {
-        item.action()
-          .then(res => ctx.reply(res))
-          .catch(() => ctx.reply('maaf, ada kesalahan di server hayati kak'));
-      }
-  
-      if (message.match(item.prefix)) {
-        item.action()
-          .then(res => ctx.reply(res))
-          .catch(() => ctx.reply('maaf, ada kesalahan di server hayati kak'));
+      if (item.suffix) {
+        if (message.match(item.suffix) !== null) item.action(ctx);
       } else {
-        ctx.reply(utils.getRandomMessage());
+        item.action(ctx);
       }
     });
   }

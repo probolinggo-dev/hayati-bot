@@ -7,12 +7,12 @@ const getRules = require('./actions/getRules');
 
 const hears = [
   {
-    suffix: /gempa/,
+    prefix: /gempa/,
     action: getGempa,
   },
   {
-    suffix: /(bpi|bitcoin)/i,
-    prefix: /((hari ini)|(dino iki))/i,
+    prefix: /(bpi|bitcoin)/i,
+    suffix: /((hari ini)|(dino iki))/i,
     action: getBpi,
   },
 ];
