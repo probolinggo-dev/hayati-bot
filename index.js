@@ -1,7 +1,25 @@
 const Telegraf = require('telegraf');
 const routes = require('./routes');
 const config = require('./config');
-const bot = new Telegraf(config.botToken);
+const bot = new Telegraf(config.botToken, {username: 'mbak_hayati_bot'});
+
+const misuhLimit = {};
+
+bot.hears(/(jancuk|kontol|memek|goblok|tolol)/i, context => {
+  const username = context.update.message.from.username;
+  const limit = misuhLimit[username];
+  if (!limit || limit < 2) {
+    misuhLimit[username] = limit ? limit + 1 : 1;
+    context.reply(`@${username} gak boleh ngomong kasar! ${3 - misuhLimit[username]} kali lagi ngomong jorok aku kick ya!`);
+  } else {
+    try {
+      const user_id = context.update.message.from.id;
+      context.kickChatMember(user_id);
+    } catch(err) {
+      context.reply(`error ngekick @${username} nih :(`);
+    }
+  }
+});
 
 routes.forEach(item => {
   if (item.event) {
