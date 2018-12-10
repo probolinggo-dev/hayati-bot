@@ -19,7 +19,7 @@ module.exports = async function(context, params) {
   const q = getKeyParam(params, 'q');
   const category = getKeyParam(params, 'category');
   const language = getKeyParam(params, 'language') || 'id';
-  const country = getKeyParam(params, 'country');
+  const country = getKeyParam(params, 'country') || 'id';
   const username = context.update.message.from.username;
   const key = `${q}-${category}-${language}-${country}`;
 
