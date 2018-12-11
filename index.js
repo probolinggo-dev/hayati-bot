@@ -1,7 +1,5 @@
-const Telegraf = require('telegraf');
 const routes = require('./routes');
-const config = require('./config');
-const bot = new Telegraf(config.botToken, {username: 'mbak_hayati_bot'});
+const bot = require('./bot');
 
 const misuhLimit = {};
 
