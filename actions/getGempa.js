@@ -99,6 +99,7 @@ const getGempa = async(context) => {
   const username = context.update.message.from.username;
   if (limitter[username]) {
     if (!blockedUser[username]) {
+      blockedUser[username] = true;
       context.reply('jangan nanya mulu kak, kan tadi udah! datanya tetep sama kok, nanti kalo ada info gempa baru, aku kabarin deh!');
     }
   } else {
