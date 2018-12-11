@@ -472,6 +472,11 @@ form-data@~2.3.1:
     combined-stream "^1.0.5"
     mime-types "^2.1.12"
 
+format-unicorn@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/format-unicorn/-/format-unicorn-1.1.1.tgz#533423f9c6bdb261bf508fff54f2d7a9b27a2251"
+  integrity sha1-UzQj+ca9smG/UI//VPLXqbJ6IlE=
+
 get-stream@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/get-stream/-/get-stream-3.0.0.tgz#8e943d1358dc37555054ecbe2edb05aa174ede14"
