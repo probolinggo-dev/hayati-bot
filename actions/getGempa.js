@@ -69,6 +69,8 @@ const getData = async() => {
 
           if (currentData !== resultString) {
             currentData = resultString;
+            limitter = {};
+            blockedUser = {};
             bot.telegram.sendMessage(config.chatId, buildResponse(), {
               parse_mode: 'Markdown'
             });
