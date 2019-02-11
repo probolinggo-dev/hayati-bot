@@ -41,7 +41,9 @@ const events = [
     event: 'new_chat_members',
     action: context => {
       const username = context.update.message.from.username;
-      context.reply(`selamat datang @${username} silahkan perkenalkan diri kak`);
+      const firstname = context.update.message.from.first_name;
+      const lastname = context.update.message.from.last_name;
+      context.reply(`selamat datang **${firstname} ${lastname}** @${username}  silahkan perkenalkan diri kak`);
     },
   },
 ];
