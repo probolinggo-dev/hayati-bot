@@ -1,0 +1,25 @@
+[package]
+name = "hayati-bot"
+version = "0.1.0"
+authors = ["Ade Yahya <adeyahyaprasetyo@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+telegram-bot = "0.7"
+bytes = "0.5"
+tokio = { version = "0.2", features = ["fs"]}
+
+tracing = "0.1.9"
+tracing-futures = "0.2"
+multipart = { version = "0.16", default-features = false, features = ["client"] }
+
+hyper = "0.13"
+hyper-tls = { version = "0.4", optional = true  }
+futures = "0.3"
+hyper-rustls = { version = "0.19", optional = true }
+
+[dev-dependencies]
+tracing-subscriber = "0.1.5"
+tokio = { version = "0.2", features = ["macros", "time", "fs"] }
